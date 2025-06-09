@@ -10,7 +10,7 @@ function App() {
   const [token, setToken] = useState(existing);
 
   const handleLogin = (t) => {
-    localStorage.setItem("token", t);
+    localStorage.setItem("token", t); 
     setAuthToken(t);
     setToken(t);
   };
@@ -22,8 +22,9 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
+    <BrowserRouter> {/* Wraps your entire app. It enables routing using the browser’s URL (like /home, /about, etc.).*/}
+      <Routes>     {/*  Holds all your <Route> definitions. Think of it like a container for multiple routes. like that -> 
+      home , info , contect etc */}
         <Route path="/register" element={<Register />} />
         <Route path="/login"    element={<Login onLogin={handleLogin} />} />
         <Route
@@ -32,7 +33,7 @@ function App() {
             token ? (
               <Landing onLogout={handleLogout} />
             ) : (
-              <Navigate to="/login" replace />
+              <Navigate to="/login" replace /> /*Used to redirect users programmatically (like after login or logout). */
             )
           }
         />
