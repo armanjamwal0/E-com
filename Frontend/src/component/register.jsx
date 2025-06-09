@@ -13,7 +13,7 @@ function Register() {
     e.preventDefault();
     try {
       await api.post("/register", form);
-      nav("/login");
+      nav("/login");// when regisetr are complete then go to login page
     } catch (e) {
       setErr(e.response?.data?.msg || "Error");
     }
