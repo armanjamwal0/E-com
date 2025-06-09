@@ -1,7 +1,7 @@
 import api from "./src/api";
 import { useEffect, useState } from "react";
 
-export default function Landing({ onLogout }) {
+ function Landing({ onLogout }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -19,3 +19,4 @@ export default function Landing({ onLogout }) {
     </div>
   );
 }
+export default Landing;
