@@ -4,6 +4,7 @@ import Register from "./register";
 import Landing from "../../landing";
 import Login from "./login";
 import {setAuthToken} from "../api";
+import Navbar from "./navbar";
 
 function App() {
   const existing = localStorage.getItem("token");
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <BrowserRouter> {/* Wraps your entire app. It enables routing using the browser’s URL (like /home, /about, etc.).*/}
+      <Navbar/>
       <Routes>     {/*  Holds all your <Route> definitions. Think of it like a container for multiple routes. like that -> 
       home , info , contect etc */}
         <Route path="/register" element={<Register />} />
