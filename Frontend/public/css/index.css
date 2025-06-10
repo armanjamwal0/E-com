@@ -1,3 +1,4 @@
+@import "tailwindcss";
 body {
   font-family: system-ui;
   display: flex;
