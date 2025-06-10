@@ -23,7 +23,7 @@ function Login({ onLogin }) {
 
   return (
     <form onSubmit={submit} className="card">
-      <h2>Login</h2>
+      <h2 className="text-3xl font-bold underline">Login</h2>
       <input name="email"    placeholder="Email"    value={form.email} onChange={change} required />
       <input name="password" placeholder="Password" value={form.password} type="password" onChange={change} required />
       <button>Sign in</button>
