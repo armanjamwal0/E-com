@@ -1,13 +1,10 @@
-@import "tailwindcss";
-@plugin "flowbite-react/plugin/tailwindcss";
-@source "../../.flowbite-react/class-list.json";
 body {
   font-family: system-ui;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
   background: #f9fafb;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* remove display:flex and centering here */
 }
 
 .card {
@@ -15,7 +12,11 @@ body {
   flex-direction: column;
   gap: 1rem;
   padding: 2rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solidrgb(23, 72, 169);
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  min-height: calc(100vh - var(--navbar-height)); /* fill viewport minus navbar */
+  padding-top: var(--navbar-height);
   border-radius: 0.75rem;
   background: white;
   width: 260px;

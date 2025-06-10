@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-export default function Navbar() {
+function Navbar() {
   const [cartOpen, setCartOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
 
@@ -137,3 +137,4 @@ export default function Navbar() {
     </nav>
   );
 }
+export default  Navbar;
