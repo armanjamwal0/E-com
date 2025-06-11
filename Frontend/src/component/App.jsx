@@ -4,8 +4,8 @@ import Register from "./register";
 import Landing from "../../landing";
 import Login from "./login";
 import {setAuthToken} from "../api";
-import Navbar from "./navbar";
-
+import Navbar from "./Nav/navbar";
+import Footer from "./Footer/footer";
 function App() {
   const existing = localStorage.getItem("token");
   const [token, setToken] = useState(existing);
@@ -24,14 +24,16 @@ function App() {
 
   return (
     <BrowserRouter> {/* Wraps your entire app. It enables routing using the browser’s URL (like /home, /about, etc.).*/}
+     <div className="min-h-screen flex flex-col ">
       <Navbar/>
+       <main className="flex-grow ">
       <Routes>     {/*  Holds all your <Route> definitions. Think of it like a container for multiple routes. like that -> 
       home , info , contect etc */}
         <Route path="/register" element={<Register />} />
         <Route path="/login"    element={<Login onLogin={handleLogin} />} />
         <Route
           path="/"
-          element={
+          element={ 
             token ? (
               <Landing onLogout={handleLogout} />
             ) : (
@@ -40,6 +42,9 @@ function App() {
           }
         />
       </Routes>
+      </main>
+    <Footer/>
+    </div>
     </BrowserRouter>
   );
 }
