@@ -5,7 +5,7 @@ import Landing from "../../landing";
 import Login from "./login";
 import {setAuthToken} from "../api";
 import Navbar from "./Nav/navbar";
-import Footer from "./Footer/footer";
+import MyFooter from "./Footer/footer"
 function App() {
   const existing = localStorage.getItem("token");
   const [token, setToken] = useState(existing);
@@ -43,7 +43,7 @@ function App() {
         />
       </Routes>
       </main>
-    <Footer/>
+    <MyFooter/>
     </div>
     </BrowserRouter>
   );
