@@ -1,11 +1,8 @@
 @import "tailwindcss";
-body {
-  font-family: system-ui;
-  background: #f9fafb;
+
+html, body,#main-root {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  /* remove display:flex and centering here */
 }
 
 .card {
@@ -32,3 +29,4 @@ button {
 button {
   cursor: pointer;
 }
+
