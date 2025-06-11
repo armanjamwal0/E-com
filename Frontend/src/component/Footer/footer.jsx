@@ -1,11 +1,4 @@
-import React from "react";
-import {
-  Footer,
-  FooterLink,
-  FooterLinkGroup,
-  FooterTitle,
-} from "flowbite-react";
-import footerlinks from "./footerlinks";
+import MyFooterGroup from "./footerGroup";
 function MyFooter() {
   return (
     <footer className="bg-gray-900 dark:bg-gray-900">
@@ -23,20 +16,7 @@ function MyFooter() {
               </span>
             </a>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            {footerlinks.map((group, index) => ( // here you need to {} this return nothing () but you add then it means in react return this in present ()
-                <div key={index}>
-                <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">
-                  {group.title}
-                </h2>
-                <FooterLinkGroup col>
-                  {group.links.map((link) => (
-                    <FooterLink href={link.href}>{link.name}</FooterLink>
-                  ))}
-                </FooterLinkGroup>
-              </div>
-            ))}
-          </div>
+          <MyFooterGroup/>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
