@@ -1,13 +1,10 @@
 import React from "react";
 
-function SocialIcon({ href, children,IconName}) {
+function SocialIcon({ href='#', children, IconName= null }) {
   return (
-    <a
-      href={href}
-      className="mx-2"
-    >
+    <a href={href} className="mx-2">
       {children}
-<span className="sr-only">{IconName}</span>
+      <span className="sr-only">{IconName}</span>
     </a>
   );
 }
