@@ -5,7 +5,8 @@ import Landing from "../../landing";
 import Login from "./login";
 import {setAuthToken} from "../api";
 import Navbar from "./Nav/navbar";
-import MyFooter from "./Footer/footer"
+import MyFooter from "./Footer/footer";
+
 function App() {
   const existing = localStorage.getItem("token");
   const [token, setToken] = useState(existing);
@@ -26,7 +27,7 @@ function App() {
     <BrowserRouter> {/* Wraps your entire app. It enables routing using the browser’s URL (like /home, /about, etc.).*/}
      <div className="min-h-screen flex flex-col ">
       <Navbar/>
-       <main className="flex-grow ">
+      <main className="flex-grow pt-16">
       <Routes>     {/*  Holds all your <Route> definitions. Think of it like a container for multiple routes. like that -> 
       home , info , contect etc */}
         <Route path="/register" element={<Register />} />

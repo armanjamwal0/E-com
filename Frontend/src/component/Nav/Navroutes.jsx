@@ -15,11 +15,6 @@ function NavbarRoutes(){
                   src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full.svg"
                   alt="MyStore logo"
                 />
-                <img
-                  className="hidden w-auto h-8 dark:block"
-                  src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full-dark.svg"
-                  alt="MyStore logo dark"
-                />
               </Link>
             </div>
 
