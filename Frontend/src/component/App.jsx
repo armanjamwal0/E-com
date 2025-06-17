@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Register from "./Pages/register";
-import Landing from "../../landing";
+import Landing from "./Pages/landing";
 import Login from "./Pages/login";
 import AuthChecker from "./AuthChecker";
 import Home from "./Pages/home";
