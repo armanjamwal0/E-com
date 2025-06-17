@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Register from "./register";
+import Register from "./Pages/register";
 import Landing from "../../landing";
-import Login from "./login";
-import Navbar from "./Nav/navbar";
+import Login from "./Pages/login";
 import AuthChecker from "./AuthChecker";
-import Home from "./home";
+import Home from "./Pages/home";
 import api from "../api";
 import PrivateRoute from "./PrivateRoute";
 import AuthLayout from "./layouts/AuthLayout";

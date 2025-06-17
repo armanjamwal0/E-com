@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import api from "../api";
+import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import LogoutButton from "./logout";
-import Navbar from "./Nav/navbar";
-import  MyFooter from "./Footer/footer";
+
 
 function Home({ setAuthenticated }) {
   const [loading, setLoading] = useState(true);
