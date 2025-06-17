@@ -33,13 +33,14 @@ def create_app():
                          
     @app.get("/")
     def check_auth():
-        user_id = session['user_id']
+        user_id = session.get('user_id')
         if user_id:
             res = db.session.execute(db.select(User).where(User.id == user_id))
             user = res.scalar()
             print('me')
             return { **user_schema(user),"authenticated": True}, 200
-        return {"authenticated": False, 'msg': 'please login first'}, 401
+        elif not user_id:
+            return {"authenticated": False, 'msg': 'please login first'}
     
     @app.post("/register")
     def register():

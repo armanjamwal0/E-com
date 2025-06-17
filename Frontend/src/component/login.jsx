@@ -2,22 +2,22 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate, Link } from "react-router-dom";
 
-
-function Login({setAuthenticated}) {
+function Login({ setAuthenticated }) {
   const nav = useNavigate(); // this function use for redirect the user to another page
   const [form, setForm] = useState({ email: "", password: "" });
   const [err, setErr] = useState("");
 
-  const change = (evt) =>{
-    const{name, value} = evt.target;
-    setForm({ ...form, [name]: value })};
+  const change = (evt) => {
+    const { name, value } = evt.target;
+    setForm({ ...form, [name]: value });
+  };
 
   const submit = async (e) => {
     e.preventDefault(); // This prevents the page from refreshing when the form is submitted.
     try {
       const { data } = await api.post("/login", form);
-      setAuthenticated(true)
-      console.log("login")
+      setAuthenticated(true);
+      console.log("login");
       nav("/home");
     } catch (e) {
       setErr(e.response?.data?.msg || "Error");
@@ -39,9 +39,7 @@ function Login({setAuthenticated}) {
             {err && <p style={{ color: "red" }}>{err}</p>}
             <form className="space-y-4 md:space-y-6" onSubmit={submit}>
               <div>
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your email
                 </label>
                 <input
@@ -55,10 +53,7 @@ function Login({setAuthenticated}) {
                 />
               </div>
               <div>
-                <label
-                  
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Password
                 </label>
                 <input
@@ -83,9 +78,7 @@ function Login({setAuthenticated}) {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label
-                      className="text-gray-500 dark:text-gray-300"
-                    >
+                    <label className="text-gray-500 dark:text-gray-300">
                       Remember me
                     </label>
                   </div>
@@ -101,14 +94,14 @@ function Login({setAuthenticated}) {
                 type="submit"
                 className="w-full text-white  bg-blue-500 hover:bg-blue-900  focus:ring-primary-300    font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Sign in 
+                Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <Link
-                  to='/register'
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                
+                  to="/register"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
                   Sign up
                 </Link>
               </p>
