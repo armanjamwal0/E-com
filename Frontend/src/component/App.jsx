@@ -1,52 +1,52 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
+import { useState, useEffect } from "react";
 import Register from "./register";
 import Landing from "../../landing";
 import Login from "./login";
-import {setAuthToken} from "../api";
 import Navbar from "./Nav/navbar";
 import MyFooter from "./Footer/footer";
+import AuthChecker from "./AuthChecker";
+import Home from "./home";
+import api from "../api";
+import PrivateRoute from "./PrivateRoute";
 
 function App() {
-  const existing = localStorage.getItem("token");
-  const [token, setToken] = useState(existing);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleLogin = (t) => {
-    localStorage.setItem("token", t); 
-    setAuthToken(t);
-    setToken(t);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setAuthToken(null);
-    setToken(null);
-  };
-
+  async function handleLogout() {
+        try {
+          const res = await api.post("/logout");
+          window.location.reload();
+          setAuthenticated(false)
+        } catch (err) {
+          console.log("Logout error:", err.response?.data || err.message);
+        }
+  }
   return (
-    <BrowserRouter> {/* Wraps your entire app. It enables routing using the browser’s URL (like /home, /about, etc.).*/}
-     <div className="min-h-screen flex flex-col ">
-      <Navbar/>
-      <main className="flex-grow pt-16">
-      <Routes>     {/*  Holds all your <Route> definitions. Think of it like a container for multiple routes. like that -> 
-      home , info , contect etc */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login"    element={<Login onLogin={handleLogin} />} />
-        <Route
-          path="/"
-          element={ 
-            token ? (
-              <Landing onLogout={handleLogout} />
-            ) : (
-              <Navigate to="/login" replace /> /*Used to redirect users programmatically (like after login or logout). */
-            )
-          }
-        />
-      </Routes>
-      </main>
-    <MyFooter/>
-    </div>
+    <BrowserRouter>
+      <AuthChecker setAuthenticated={setAuthenticated} setLoading={setLoading}/>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main className="flex-grow pt-32 sm:pt-28 md:pt-20 lg:pt-16">
+          <Routes>
+            <Route path="/" element={<Landing  />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={<Login setAuthenticated={setAuthenticated} />}
+            />
+            <Route path="/home" element={
+            <PrivateRoute authenticated={authenticated}>  
+              <Home  onLogout={handleLogout} />
+            </PrivateRoute>
+          }/>
+          </Routes>
+        </main>
+        <MyFooter />
+      </div>
     </BrowserRouter>
   );
 }
-export default  App;
+
+export default App;

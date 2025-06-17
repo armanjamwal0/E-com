@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { BsCart } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
-import StorefrontIcon from '@mui/icons-material/Storefront';
-const Navbar = () => {
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import { AnimatePresence, motion } from "framer-motion";
+
+// i need to fix profile dropdow menu
+function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  function handleclick() {
+    setDropdownOpen(true);
+  }
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent text-white backdrop-blur-md shadow-md antialiased">
+    <nav className="stiky top-0 left-0 w-full  z-50 bg-transparent text-white backdrop-blur-md shadow-md antialiased">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Left: Logo */}
-        
-        <div className=" text-gray-500 text-1xl font-bold"> <StorefrontIcon className="w-5 h-5 lg:me-1"/>
-        MyLogo
+
+        <div className=" text-gray-500 text-1xl font-bold ">
+          {" "}
+          <StorefrontIcon className="w-5 h-5 lg:me-1" />
+          MyLogo
         </div>
 
         {/* Center: Search Bar */}
@@ -27,24 +35,28 @@ const Navbar = () => {
         <div className="flex items-center gap-4 relative">
           {/* Login/Profile */}
           <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 text-gray-400 hover:text-gray-900 transition duration-200"
-            >
-              <FiUser className="text-xl" />
-              <span className="hidden md:inline">Login</span>
+            <button onClick={handleclick} className="superbutton flex items-center gap-1">
+              login
             </button>
-
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  Profile
-                </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                  Logout
-                </a>
-              </div>
-            )}
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md">
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                      Profile
+                    </a>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100">
+                      Logout
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Cart */}
@@ -62,6 +74,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;
