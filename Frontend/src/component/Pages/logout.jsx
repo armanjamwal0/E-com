@@ -1,4 +1,4 @@
-import api from "../api"; // Axios instance with withCredentials: true
+import api from "../../api"; // Axios instance with withCredentials: true
 import { useNavigate } from "react-router-dom";
 
 function LogoutButton({ setAuthenticated }) {
