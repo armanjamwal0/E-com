@@ -23,7 +23,7 @@ function App() {
       />
 
       <Routes>
-        {/* Auth Layout for Public Routes */}
+        {/* ⬇️ Auth Layout for Public Routes */}
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Landing />} />
           <Route path="/register" element={<Register />} />
@@ -33,7 +33,7 @@ function App() {
           />
         </Route>
 
-        {/* Main Layout for Private Routes */}
+        {/* ⬇️ Main Layout for Private Routes */}
         <Route element={<MainLayout />}>
           <Route
             path="/home"
