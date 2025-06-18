@@ -14,7 +14,7 @@ function Home({ setAuthenticated }) {
       try {
         const res = await api.get("/home");
         setAuth(res.data.authenticated);
-        console.log(res.data.msg);
+        console.log(res.data);
       } catch (err) {
         console.log("error : ", err);
       } finally {

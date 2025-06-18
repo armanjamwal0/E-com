@@ -12,4 +12,4 @@ class Config:
     SESSION_COOKIE_SAMESITE = "None"
     SESSION_COOKIE_SECURE = True  # Set True if using HTTPS
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_REDIS = redis.from_url('redis://127.0.0.1:6379')
+    SESSION_REDIS = redis.Redis(host="localhost", port=6379)

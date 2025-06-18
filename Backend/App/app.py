@@ -24,7 +24,7 @@ def create_app():
     # ─── Routes ────────────────────────────────────────────────────────────────── #
     @app.get('/home')
     def home():
-        userId = session['user_id']
+        userId = session.get('user_id')
         if userId:
             res = db.session.execute(db.select(User).where(User.id == userId))
             user = res.scalar()
@@ -67,7 +67,7 @@ def create_app():
         user = response.scalar()
         # user = User.query.filter_by(email=data["email"]).first()
         if not user or not check_password_hash(user.password, data["password"]):
-            return {"msg": "Please Check Your email if you regisetred"}
+            return {"authenticated": False, "msg": "Please Check Your email if you regisetred"}
         # if any user comes then store user id in session 
         session["user_id"] = user.id
         return {"user": user_schema(user)}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
