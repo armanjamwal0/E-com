@@ -16,14 +16,13 @@ function Login({ setAuthenticated }) {
     e.preventDefault(); // This prevents the page from refreshing when the form is submitted.
     try {
       const res = await api.post("/login", form);
-      if (res.data.authenticated){
-        nav("/home");
-        console.log("login");
+      if (res.data.authenticated) {
         setAuthenticated(true);
-      }
-      else{
-        setErr("Please Check Your password");
-      }
+        nav("/home");
+        console.log("Login successful");
+    } else {
+        setErr("Login failed");
+    }
     } catch (e) {
       console.log(e.response?.data?.msg || "Error");
     }

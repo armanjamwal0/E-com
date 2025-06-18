@@ -70,7 +70,7 @@ def create_app():
             return {"authenticated": False, "msg": "Please Check Your email if you regisetred"}
         # if any user comes then store user id in session 
         session["user_id"] = user.id
-        return {"user": user_schema(user)}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
+        return {**user_schema(user),"authenticated": True}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
     # is check if any user is login then authenticated true if not then user_id = sessionuser
     
 
