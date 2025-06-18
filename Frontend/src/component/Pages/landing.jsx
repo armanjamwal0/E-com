@@ -4,10 +4,8 @@ import { useNavigate, Link } from "react-router-dom";
 import Links from "../Links/Link";
 
 function Landing() {
-  const [user, setUser] = useState(null);
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -16,7 +14,6 @@ function Landing() {
         console.log("User:", res.data);
         setAuth(res.data.authenticated);
         setLoading(false)
-        setUser(res.data);
       } catch (err) {
         console.log("error : ", err);
       }

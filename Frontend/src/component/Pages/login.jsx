@@ -15,12 +15,17 @@ function Login({ setAuthenticated }) {
   const submit = async (e) => {
     e.preventDefault(); // This prevents the page from refreshing when the form is submitted.
     try {
-      const { data } = await api.post("/login", form);
-      setAuthenticated(true);
-      console.log("login");
-      nav("/home");
+      const res = await api.post("/login", form);
+      if (res.data.authenticated){
+        nav("/home");
+        console.log("login");
+        setAuthenticated(true);
+      }
+      else{
+        setErr("Please Check Your password");
+      }
     } catch (e) {
-      setErr(e.response?.data?.msg || "Error");
+      console.log(e.response?.data?.msg || "Error");
     }
   };
 
@@ -39,6 +44,7 @@ function Login({ setAuthenticated }) {
                 type={"email"}
                 name={"email"}
                 id={"email"}
+                value={form.email}
                 onchange={change}
                 placeholder={"name@company.com"}
               />
@@ -47,6 +53,7 @@ function Login({ setAuthenticated }) {
                 type={"password"}
                 name={"password"}
                 id={"password"}
+                value={form.password}
                 onchange={change}
                 placeholder={"••••••••"}
               />
