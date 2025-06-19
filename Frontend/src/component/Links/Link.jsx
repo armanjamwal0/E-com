@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const Links = ({ to, label, children }) => {
+const Links = ({ to, label, children = null }) => {
   return (
     <Link
       to={to}

@@ -28,7 +28,7 @@ def create_app():
         if userId:
             res = db.session.execute(db.select(User).where(User.id == userId))
             user = res.scalar()
-            return jsonify({**user_schema(user),'authenticated': True})
+            return jsonify({**user_schema(user),'authenticated': True}) #
         return jsonify({'authenticated': False, 'msg':'unauthenticated'})
                          
     @app.get("/")
@@ -38,7 +38,7 @@ def create_app():
             res = db.session.execute(db.select(User).where(User.id == user_id))
             user = res.scalar()
             print('me')
-            return { **user_schema(user),"authenticated": True}, 200
+            return { **user_schema(user),"authenticated": True}, 200 #
         elif not user_id:
             return {"authenticated": False, 'msg': 'please login first'}
     
@@ -46,19 +46,23 @@ def create_app():
     def register():
         data = request.get_json()
         print(data)
-        response = db.session.execute(db.select(User).where(User.email == data["email"]))
+        name = data['name']
+        email = data['email']
+        password = data['password']
+        response = db.session.execute(db.select(User).where(User.email == email))
         user = response.scalar()
         if user: 
             return {"msg": "User already exists"}, 400
-        hashed = generate_password_hash(data["password"], method='pbkdf2:sha256',salt_length=16)
+        hashed = generate_password_hash(password, method='pbkdf2:sha256',salt_length=16)
         user   = User(
-            email=data["email"],
+            name = name,
+            email=email,
             password=hashed
             )
         db.session.add(user); 
         db.session.commit()
-        print(user_schema(user))
-        return user_schema(user), 201
+        # print(user_schema(user)),
+        return  user_schema(user), 201
 
     @app.post("/login")
     def login():
@@ -71,7 +75,7 @@ def create_app():
         # if any user comes then store user id in session 
         session["user_id"] = user.id
         return {**user_schema(user),"authenticated": True}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
-    # is check if any user is login then authenticated true if not then user_id = sessionuser
+    # is check if any user is login then authenticated true if not then user_id = sessionuser ,
     
 
     @app.post("/logout")

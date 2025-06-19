@@ -2,6 +2,9 @@ import { useState } from "react";
 import api from "../../api";
 import { useNavigate, Link } from "react-router-dom";
 import Inputbutton from "../inputs/input";
+
+
+
 function Login({ setAuthenticated }) {
   const nav = useNavigate(); // this function use for redirect the user to another page
   const [form, setForm] = useState({ email: "", password: "" });
@@ -18,7 +21,7 @@ function Login({ setAuthenticated }) {
       const res = await api.post("/login", form);
       if (res.data.authenticated) {
         setAuthenticated(true);
-        nav("/home");
+        nav("/home",{ replace: true }); // replace do if user click on back button then user can't go back 
         console.log("Login successful");
     } else {
         setErr("Login failed");
