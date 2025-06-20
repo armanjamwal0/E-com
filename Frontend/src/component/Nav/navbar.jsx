@@ -1,84 +1,105 @@
-import React, { useState } from "react";
-import { BsCart } from "react-icons/bs";
-import { FiUser } from "react-icons/fi";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Menu, X, User, LogOut } from "lucide-react";
+import {motion ,AnimatePresence} from 'framer-motion'
+const Navbar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
 
-// i need to fix profile dropdow menu
-function Navbar() {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleProfile = () => setProfileOpen(!profileOpen);
 
-  function handleclick() {
-    setDropdownOpen(true);
-  }
   return (
-    <header className="shadow-md">
-      <nav className="stiky top-0 left-0 w-full  z-50 bg-transparent text-white backdrop-blur-md shadow-md antialiased">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          {/* Left: Logo */}
-
-          <div className=" text-gray-500 text-1xl font-bold ">
-            {" "}
-            <StorefrontIcon className="w-5 h-5 lg:me-1" />
-            MyLogo
+    <>
+      {/* Top Navbar */}
+      <nav className="bg-gray-400 shadow-2xl sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+          {/* Hamburger + Logo */}
+          <div className="flex items-center gap-4">
+            <button onClick={toggleSidebar} className="md:hidden">
+              <Menu size={24} />
+            </button>
+            <Link to="/home" className="text-xl font-bold text-blue-600">
+              MyStore
+            </Link>
           </div>
 
-          {/* Center: Search Bar */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full max-w-md px-4 py-2 rounded-full bg-white text-black placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring"
-            />
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex gap-6 items-center">
+            <Link to="/home" className="hover:text-blue-600">Home</Link>
+            <Link to="/products" className="hover:text-blue-600">Products</Link>
+            <Link to="/about" className="hover:text-blue-600">About Us</Link>
+            <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
           </div>
 
-          {/* Right: Login Dropdown + Cart */}
-          <div className="flex items-center gap-4 relative">
-            {/* Login/Profile */}
-            <div className="relative">
-              <button
-                onClick={handleclick}
-                className="superbutton flex items-center gap-1"
-              >
-                login
-              </button>
-              <AnimatePresence>
-                {dropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+          {/* Profile Dropdown (always in top right) */}
+          <div className="relative">
+            <button
+              onClick={toggleProfile}
+              className="flex items-center gap-2 hover:text-blue-600"
+            >
+              <User size={20} />
+              <span className="hidden sm:inline">Profile</span>
+            </button>
+
+            <AnimatePresence>
+              {profileOpen && (
+                <motion.div
+                  key="profile-dropdown"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 mt-2 w-40 bg-white shadow-md border rounded-md z-50"
+                >
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
                   >
-                    <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md">
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Profile
-                      </a>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Logout
-                      </a>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Cart */}
-            <BsCart className="text-xl text-gray-400 hover:text-gray-900 transition duration-200" />
+                    My Profile
+                  </Link>
+                  <button
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                    onClick={() => console.log("Logout clicked")}
+                  >
+                    <LogOut size={16} /> Logout
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
-
-        {/* Mobile Search (Optional) */}
-        <div className="md:hidden px-4 mt-2 pb-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full px-4 py-2 rounded-full bg-white text-black placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring"
-          />
         </div>
       </nav>
-    </header>
+
+      {/* Overlay when Sidebar is open */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Sidebar (Mobile only) */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="p-4 flex justify-between items-center border-b">
+          <h2 className="text-xl font-bold text-blue-600">Menu</h2>
+          <button onClick={toggleSidebar}>
+            <X size={24} />
+          </button>
+        </div>
+        <div className="flex flex-col gap-3 p-4">
+          <Link to="/home" onClick={toggleSidebar} className="hover:text-blue-600">Home</Link>
+          <Link to="/products" onClick={toggleSidebar} className="hover:text-blue-600">Products</Link>
+          <Link to="/about" onClick={toggleSidebar} className="hover:text-blue-600">About Us</Link>
+          <Link to="/contact" onClick={toggleSidebar} className="hover:text-blue-600">Contact Us</Link>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
 export default Navbar;
