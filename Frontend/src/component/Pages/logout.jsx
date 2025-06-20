@@ -16,13 +16,6 @@ function LogoutButton({ setAuthenticated }) {
     }
   };
 
-  return (
-    <button
-      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-      onClick={handleLogout}
-    >
-      logout
-    </button>
-  );
+  return null
 }
 export default LogoutButton;

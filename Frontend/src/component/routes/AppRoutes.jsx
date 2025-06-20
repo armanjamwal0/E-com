@@ -28,7 +28,7 @@ const AppRoutes = ({setLoading, setAuthenticated , authenticated, loading}) => {
         </Route>
 
         {/* ⬇️ Main Layout for Private Routes */}
-        <Route element={<MainLayout />}>
+        <Route element={<MainLayout setAuthenticated={setAuthenticated}/>}>
           <Route
             path="/home"
             element={
