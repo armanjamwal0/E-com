@@ -1,14 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, User, LogOut } from "lucide-react";
 import {motion ,AnimatePresence} from 'framer-motion'
-const Navbar = () => {
+import api from "../../api";
+
+
+const Navbar = ({setAuthenticated}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const toggleProfile = () => setProfileOpen(!profileOpen);
+  // Logout Function
+  const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    try {
+      await api.post("/logout"); // this route fetch data from backend and send back to
+      // backend and then backend send to server and server delete data from server ! from browser
+      console.log("User logged out");
+      navigate("/login");
+      setAuthenticated(false);
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
   return (
     <>
       {/* Top Navbar */}
@@ -60,7 +76,7 @@ const Navbar = () => {
                   </Link>
                   <button
                     className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
-                    onClick={() => console.log("Logout clicked")}
+                    onClick={handleLogout}
                   >
                     <LogOut size={16} /> Logout
                   </button>
