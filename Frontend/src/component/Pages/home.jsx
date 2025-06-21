@@ -30,7 +30,6 @@ function Home({ setAuthenticated }) {
     <>
 
       <div className="p-10 text-center">
-        <LogoutButton setAuthenticated={setAuthenticated} />
         <h1 className="text-3xl font-bold text-blue-600">
           Welcome to Home Page!
         </h1>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://sad-planets-work.loca.lt",// http://127.0.0.1:5000here axios use for #_______________________________________
+  baseURL: "http://127.0.0.1:5000",// http://127.0.0.1:5000here axios use for #_______________________________________
   //An Axios instance is a customized version of Axios with default settings 
   // (like base URL, headers, tokens, etc.) pre-configured. Instead of repeating those settings every time, 
   // you configure them once.
