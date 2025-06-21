@@ -4,3 +4,13 @@
 redis server in docker 
 
 3> Then you need to start redis server in docker
+
+
+Run Redis using Docker so you don’t need to install it on your system manually.
+download from this  website doecker  https://www.docker.com/products/docker-desktop
+1st command > docker pull redis
+2nd comm> docker run -d --name my-redis -p 6379:6379 redis
+3rd comm> redis-cli -h localhost -p 6379
+4th > Done now you can run using this command  docker start my-redis
+5th optional> Stop the container docker stop my-redis
+6th optional > for list running containers docker ps

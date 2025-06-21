@@ -1,11 +1,10 @@
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, User, LogOut } from "lucide-react";
-import {motion ,AnimatePresence} from 'framer-motion'
+import { motion, AnimatePresence } from "framer-motion";
 import api from "../../api";
 
-
-const Navbar = ({setAuthenticated}) => {
+const Navbar = ({ setAuthenticated }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -25,10 +24,15 @@ const Navbar = ({setAuthenticated}) => {
       console.error("Logout failed", err);
     }
   };
+  const sidebarVariants = {
+    hidden: { x: "-100%" },
+    visible: { x: 0 },
+    exit: { x: "-100%" },
+  };
   return (
     <>
       {/* Top Navbar */}
-      <nav className="bg-gray-400 shadow-2xl sticky top-0 z-50">
+      <nav className="backdrop-blur-2xl shadow-2xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
           {/* Hamburger + Logo */}
           <div className="flex items-center gap-4">
@@ -42,10 +46,18 @@ const Navbar = ({setAuthenticated}) => {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex gap-6 items-center">
-            <Link to="/home" className="hover:text-blue-600">Home</Link>
-            <Link to="/products" className="hover:text-blue-600">Products</Link>
-            <Link to="/about" className="hover:text-blue-600">About Us</Link>
-            <Link to="/contact" className="hover:text-blue-600">Contact Us</Link>
+            <Link to="/home" className="hover:text-blue-600">
+              Home
+            </Link>
+            <Link to="/products" className="hover:text-blue-600">
+              Products
+            </Link>
+            <Link to="/about" className="hover:text-blue-600">
+              About Us
+            </Link>
+            <Link to="/contact" className="hover:text-blue-600">
+              Contact Us
+            </Link>
           </div>
 
           {/* Profile Dropdown (always in top right) */}
@@ -88,32 +100,68 @@ const Navbar = ({setAuthenticated}) => {
       </nav>
 
       {/* Overlay when Sidebar is open */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={toggleSidebar}
-        />
-      )}
 
-      {/* Sidebar (Mobile only) */}
-      <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-md z-50 transform transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <div className="p-4 flex justify-between items-center border-b">
-          <h2 className="text-xl font-bold text-blue-600">Menu</h2>
-          <button onClick={toggleSidebar}>
-            <X size={24} />
-          </button>
-        </div>
-        <div className="flex flex-col gap-3 p-4">
-          <Link to="/home" onClick={toggleSidebar} className="hover:text-blue-600">Home</Link>
-          <Link to="/products" onClick={toggleSidebar} className="hover:text-blue-600">Products</Link>
-          <Link to="/about" onClick={toggleSidebar} className="hover:text-blue-600">About Us</Link>
-          <Link to="/contact" onClick={toggleSidebar} className="hover:text-blue-600">Contact Us</Link>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleSidebar}
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              className="fixed top-0 left-0 h-full w-64 bg-white shadow-md z-50 p-4"
+              variants={sidebarVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex justify-between items-center border-b pb-4">
+                <h2 className="text-xl font-bold text-blue-600">Menu</h2>
+                <button onClick={toggleSidebar}>
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="flex flex-col gap-3 pt-4">
+                <Link
+                  to="/home"
+                  onClick={toggleSidebar}
+                  className="hover:text-blue-600"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/products"
+                  onClick={toggleSidebar}
+                  className="hover:text-blue-600"
+                >
+                  Products
+                </Link>
+                <Link
+                  to="/about"
+                  onClick={toggleSidebar}
+                  className="hover:text-blue-600"
+                >
+                  About Us
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={toggleSidebar}
+                  className="hover:text-blue-600"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

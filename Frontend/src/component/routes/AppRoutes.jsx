@@ -7,8 +7,16 @@ import Home from "../Pages/home";
 import PrivateRoute from "../PrivateRoute";
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/Mainlayout";
+import PageNotFound from "../Pages/404page";
+import Contactus from "../Pages/Contactus";
+import Aboutus from "../Pages/About";
 
-const AppRoutes = ({setLoading, setAuthenticated , authenticated, loading}) => {
+const AppRoutes = ({
+  setLoading,
+  setAuthenticated,
+  authenticated,
+  loading,
+}) => {
   return (
     <BrowserRouter>
       <AuthChecker
@@ -19,7 +27,7 @@ const AppRoutes = ({setLoading, setAuthenticated , authenticated, loading}) => {
       <Routes>
         {/* ⬇️ Auth Layout for Public Routes */}
         <Route element={<AuthLayout />}>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Landing setAuthenticated={setAuthenticated} setLoading={setLoading} loading={loading} />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
@@ -28,16 +36,21 @@ const AppRoutes = ({setLoading, setAuthenticated , authenticated, loading}) => {
         </Route>
 
         {/* ⬇️ Main Layout for Private Routes */}
-        <Route element={<MainLayout setAuthenticated={setAuthenticated}/>}>
+        <Route
+          element={
+            <PrivateRoute authenticated={authenticated} loading={loading}>
+              <MainLayout setAuthenticated={setAuthenticated} />
+            </PrivateRoute>
+          }
+        >
           <Route
             path="/home"
-            element={
-              <PrivateRoute authenticated={authenticated} loading={loading}>
-                <Home setAuthenticated={setAuthenticated} />
-              </PrivateRoute>
-            }
+            element={<Home setAuthenticated={setAuthenticated} />}
           />
+          <Route path="/contact" element={<Contactus/>}/>
+          <Route path="/about" element={<Aboutus/>}/>
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
