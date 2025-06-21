@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom";
 
 function AuthChecker({ setAuthenticated, setLoading }) {
   const Nav = useNavigate();
+
+
   useEffect(() => {
     (async () => {
       try {
         const res = await api.get("/");
         if (res.data.authenticated) {
-          Nav("/home");
           setAuthenticated(true);
+          // Nav("/home");
         }
       } catch (err) {
         console.log("error : ", err);
+        setAuthenticated(false)
       } finally {
         setLoading(false);
       }

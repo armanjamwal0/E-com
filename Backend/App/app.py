@@ -41,7 +41,6 @@ def create_app():
             return { **user_schema(user),"authenticated": True}, 200 #
         elif not user_id:
             return {"authenticated": False, 'msg': 'please login first'}
-    
     @app.post("/register")
     def register():
         data = request.get_json()

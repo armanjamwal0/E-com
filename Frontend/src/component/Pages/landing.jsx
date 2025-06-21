@@ -3,19 +3,25 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Links from "../Links/Link";
 
-function Landing() {
-  const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+function Landing({setAuthenticated ,setLoading, loading}) {
+  const nav = useNavigate();
 
   useEffect(() => {
     (async () => {
       try {
         const res = await api.get("/");
-        console.log("User:", res.data);
-        setAuth(res.data.authenticated);
-        setLoading(false);
+        if (res.data.authenticated){
+          nav('/home') // if user is already login then return home 
+          setAuthenticated(true) // if is true then return private route home
+          console.log("User:", res.data);
+          setLoading(true)
+        }
       } catch (err) {
         console.log("error : ", err);
+        setAuthenticated(false)
+      }
+      finally{
+        setLoading(false)
       }
     })();
   }, []);

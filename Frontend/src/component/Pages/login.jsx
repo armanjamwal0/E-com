@@ -20,8 +20,8 @@ function Login({ setAuthenticated }) {
     try {
       const res = await api.post("/login", form);
       if (res.data.authenticated) {
-        setAuthenticated(true);
         nav("/home",{ replace: true }); // replace do if user click on back button then user can't go back 
+        setAuthenticated(true);
         console.log("Login successful");
     } else {
         setErr("Login failed");
