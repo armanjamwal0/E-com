@@ -21,5 +21,5 @@ Set Migration
 2nd optional> echo $env:FLASK_APP For check
 3rd com> flask db init  
 4th comm> flask db migrate -m "Initial" 
-5th comm> flask db migrate -m "add new fields"  if You add aanything in database 
+5th comm> flask db migrate -m "add new fields"  if You add anything in database 
 6th command > flask db upgrade for commit 
