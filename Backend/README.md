@@ -14,3 +14,12 @@ download from this  website doecker  https://www.docker.com/products/docker-desk
 4th > Done now you can run using this command  docker start my-redis
 5th optional> Stop the container docker stop my-redis
 6th optional > for list running containers docker ps
+
+
+Set Migration 
+1 com>  $env:FLASK_APP = "run.py" 
+2nd optional> echo $env:FLASK_APP For check
+3rd com> flask db init  
+4th comm> flask db migrate -m "Initial" 
+5th comm> flask db migrate -m "add new fields"  if You add aanything in database 
+6th command > flask db upgrade for commit 

@@ -28,7 +28,7 @@ def create_app():
         if userId:
             res = db.session.execute(db.select(User).where(User.id == userId))
             user = res.scalar()
-            return jsonify({**user_schema(user),'authenticated': True}) #
+            return jsonify({**(user_schema(user) if user else {}),'authenticated': True}) #
         return jsonify({'authenticated': False, 'msg':'unauthenticated'})
                          
     @app.get("/")
@@ -38,7 +38,8 @@ def create_app():
             res = db.session.execute(db.select(User).where(User.id == user_id))
             user = res.scalar()
             print('me')
-            return { **user_schema(user),"authenticated": True}, 200 #
+            return { **(user_schema(user) if user else {}),"authenticated": True}, 200 # if user exist then return 
+            # user_schema if not then return empty dic {}
         elif not user_id:
             return {"authenticated": False, 'msg': 'please login first'}
     @app.post("/register")
@@ -61,7 +62,7 @@ def create_app():
         db.session.add(user); 
         db.session.commit()
         # print(user_schema(user)),
-        return  user_schema(user), 201
+        return  {**(user_schema(user) if user else {})}, 201
 
     @app.post("/login")
     def login():
@@ -73,7 +74,7 @@ def create_app():
             return {"authenticated": False, "msg": "Please Check Your email if you regisetred"}
         # if any user comes then store user id in session 
         session["user_id"] = user.id
-        return {**user_schema(user),"authenticated": True}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
+        return {**(user_schema(user) if user else {}),"authenticated": True}, 200 # this conver user pass and email into dic this use for testing purpose to send email to user 
     # is check if any user is login then authenticated true if not then user_id = sessionuser ,
     
 
