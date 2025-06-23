@@ -1,17 +1,21 @@
 import os, datetime, dotenv
 from flask import Flask, request, jsonify, session
 from config import Config  # Make sure this path is correct
-from .models import User
-from . import db,  migrate, cors  # Import extensions from __init__.py
+from App import db, migrate, cors  # Import extensions from __init__.py
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_session import Session
 from .helpers import user_schema
+from .utils.slugify import generate_slug
+from App import events
+from .Models.user import User
 
 
 dotenv.load_dotenv()
 
 
 #_____Flask App_________________________________________________________________#
+
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -22,6 +26,7 @@ def create_app():
     Session(app)
 
     # ─── Routes ────────────────────────────────────────────────────────────────── #
+    
     @app.get('/home')
     def home():
         userId = session.get('user_id')
@@ -83,5 +88,3 @@ def create_app():
         session.pop("user_id", None)
         return jsonify({"message": "Logged out"})
     return app
-
-
