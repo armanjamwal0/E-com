@@ -1,6 +1,5 @@
 from App.app import create_app, db
-from App import models  # Make sure models are imported
-
+import App.Models 
 app = create_app()
 
 # Only use this for development (not with flask-migrate)
