@@ -8,7 +8,7 @@ from .helpers import user_schema
 from .utils.slugify import generate_slug
 from App import events
 from .Models.user import User
-
+from .Models.role import UserEnum
 
 dotenv.load_dotenv()
 
@@ -62,7 +62,8 @@ def create_app():
         user   = User(
             name = name,
             email=email,
-            password=hashed
+            password=hashed,
+            role = UserEnum.USER
             )
         db.session.add(user); 
         db.session.commit()

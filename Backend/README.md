@@ -23,3 +23,8 @@ Set Migration
 4th comm> flask db migrate -m "Initial" 
 5th comm> flask db migrate -m "add new fields"  if You add anything in database 
 6th command > flask db upgrade for commit 
+
+defult user email and pass only for testing Not for production
+email - admin@gamil.com
+pass - admin123
+role  - admin

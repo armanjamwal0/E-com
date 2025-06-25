@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from enum import Enum
 from sqlalchemy import Enum as SQLAlchemyEnum
 from .base import AuditMixin
-from .subcategories import SubCategory
+from .subcategory import SubCategory
 
 
 
