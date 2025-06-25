@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum as SQLAlchemyEnum
 from .base import AuditMixin
 # from .user import User
-from .genderenum import GenderEnum
+from .role import GenderEnum
 # from .subcategories import SubCategory
 
 
@@ -21,14 +21,17 @@ class Product(db.Model,AuditMixin):
     description: Mapped[str] = mapped_column(Text)
     price: Mapped[float] = mapped_column(Float, nullable=False)
     image: Mapped[str] = mapped_column(String(255))
+    quantity:Mapped[int] = mapped_column(INTEGER , nullable=False , default=0)
     slug: Mapped[str] = mapped_column(String(250), nullable=False, unique=True)
-    gender:Mapped[GenderEnum] = mapped_column(SQLAlchemyEnum(GenderEnum), nullable=False)
+    gender:Mapped[GenderEnum | None] = mapped_column(SQLAlchemyEnum(GenderEnum), nullable=True)
     
-    subcategorie_id:Mapped[int] = mapped_column(INTEGER, ForeignKey('subcategories.id'), nullable=False)
+    created_by: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    updated_by: Mapped[int] = mapped_column(ForeignKey('users.id'))
     
+    subcategory_id:Mapped[int] = mapped_column(INTEGER, ForeignKey('subcategories.id'), nullable=False)
     # relationship
     subcategory:Mapped['SubCategory']  = relationship(back_populates='product')
     
-    creator: Mapped['User'] = relationship(foreign_keys=AuditMixin.created_by, back_populates="created_products")
-    updater: Mapped['User'] = relationship(foreign_keys=AuditMixin.updated_by, back_populates="updated_products")
+    creator: Mapped['User'] = relationship('User',foreign_keys=created_by, back_populates="created_products")
+    updater: Mapped['User'] = relationship('User',foreign_keys=updated_by, back_populates="updated_products")
     

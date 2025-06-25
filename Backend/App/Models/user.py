@@ -5,9 +5,9 @@ from sqlalchemy.orm import Mapped, mapped_column
 from App import db 
 from sqlalchemy.orm import DeclarativeBase , Mapped, mapped_column ,relationship
 from sqlalchemy import INTEGER, String , Float , Text ,Boolean ,ForeignKey , DateTime
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from App.Models.product import Product
+from App.Models.product import Product
+from sqlalchemy import Enum as SQLAlchemyEnum
+from .role import UserEnum
 
 
 class User(db.Model):
@@ -16,6 +16,7 @@ class User(db.Model):
     name : Mapped[str] = mapped_column(String(250), nullable=False)
     email:Mapped[str] = mapped_column(String(250),unique=True,nullable=False)
     password:Mapped[str] = mapped_column(String(250),nullable=False)
+    role:Mapped[UserEnum] = mapped_column(SQLAlchemyEnum(UserEnum),nullable=False)
     
     created_products: Mapped[list["Product"]] = relationship(back_populates="creator", foreign_keys="Product.created_by") 
     # list["Product"] This relationship will return a list of Product objects.
