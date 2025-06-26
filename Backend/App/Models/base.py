@@ -14,9 +14,45 @@ from sqlalchemy import Enum as SQLAlchemyEnum
 
 
 class AuditMixin:
+    __abstract__ = True
+    def to_dict(self):
+        """Convert the model instance into a dictionary of its column attributes."""
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime,default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime, onupdate=lambda: datetime.now(timezone.utc))
     
     created_by:Mapped[int] = mapped_column(INTEGER, ForeignKey("users.id"), nullable=False)
     updated_by:Mapped[int] = mapped_column(INTEGER, ForeignKey("users.id"), nullable=False)
+    
+    
+    
+'''
+ __abstract__ = True
+    def to_dict(self):
+        """Convert the model instance into a dictionary of its column attributes."""
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+
+ __abstract__ = True is means only a base model ! a table 
+ 
+ 
+----------"how is this function work "---------------
+    def to_dict(self):
+        """Convert the model instance into a dictionary of its column attributes."""
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        
+1> for c in self.__table__.columns      
+      this is line give you all columns in table like product then give like this 
+          id
+          name 
+          etc
+        like that 
+2>  getattr(self, c.name) 
+    this work like 
+    self.id , self.name , self.etc like that 
+3> c.name 
+    this line convert the id into string "id"
+how you use this function you can declear in models liek category then use category.to_dict(categoryb data) like that        
+'''

@@ -20,7 +20,7 @@ def RunProduct():
                 "while a 27 W fast charge and 15 W MagSafe keep you powered."
                 "Available in four titanium finishes."
             ),
-            "price": 121900.000,
+            "price": 121900.00,
             "image": "https://m.media-amazon.com/images/I/31hmAP7NTqL._SY445_SX342_QL70_FMwebp_.jpg",
             "quantity": 10,
         },
@@ -37,7 +37,7 @@ def RunProduct():
                 "secure, and smart mobile experience. All housed in a sleek aerospace-grade aluminum design with "
                 "Ceramic Shield front cover for ultimate durability."
             ),
-            "price": 121900.000,
+            "price": 121900.00,
             "image": "https://m.media-amazon.com/images/I/31A-AWx8PLL._SY445_SX342_QL70_FMwebp_.jpg",
             "quantity": 5,
         },
@@ -55,7 +55,7 @@ def RunProduct():
                 " along with advanced zoom capabilities and enhanced Nightography for brilliant low-light photography."
                 " The device also includes a built-in S Pen for productivity on the go."
             ),
-            "price": 102000.000,
+            "price": 102000.00,
             "image": "https://m.media-amazon.com/images/I/717Q2swzhBL._SX679_.jpg",
             "quantity": 20,
         },
@@ -73,7 +73,7 @@ def RunProduct():
                 " and dependable performance across scenarios."
                 " The 32 MP front camera captures crisp selfies and supports 4K recording."
             ),
-            "price": 59998.000,
+            "price": 59998.00,
             "image": "https://m.media-amazon.com/images/I/519PLA1WnuL._SX679_.jpg",
             "quantity": 50,
         },

@@ -10,6 +10,7 @@ import MainLayout from "../layouts/Mainlayout";
 import PageNotFound from "../Pages/404page";
 import Contactus from "../Pages/Contactus";
 import Aboutus from "../Pages/About";
+import ProductGrid from "../Pages/Product";
 
 const AppRoutes = ({
   setLoading,
@@ -49,6 +50,7 @@ const AppRoutes = ({
           />
           <Route path="/contact" element={<Contactus/>}/>
           <Route path="/about" element={<Aboutus/>}/>
+          <Route path= "/products" element= {<ProductGrid/>}/>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
