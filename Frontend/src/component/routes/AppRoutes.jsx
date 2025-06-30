@@ -10,7 +10,7 @@ import MainLayout from "../layouts/Mainlayout";
 import PageNotFound from "../Pages/404page";
 import Contactus from "../Pages/Contactus";
 import Aboutus from "../Pages/About";
-import ProductGrid from "../Pages/Product";
+import Product from "../Pages/Product";
 
 const AppRoutes = ({
   setLoading,
@@ -24,36 +24,46 @@ const AppRoutes = ({
         setAuthenticated={setAuthenticated}
         setLoading={setLoading}
       />
+      {!loading && (
+        <Routes>
+          {/* ⬇️ Auth Layout for Public Routes */}
+          <Route element={<AuthLayout />}>
+            <Route
+              path="/"
+              element={
+                <Landing
+                  setAuthenticated={setAuthenticated}
+                  setLoading={setLoading}
+                  loading={loading}
+                />
+              }
+            />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={<Login setAuthenticated={setAuthenticated} />}
+            />
+          </Route>
 
-      <Routes>
-        {/* ⬇️ Auth Layout for Public Routes */}
-        <Route element={<AuthLayout />}>
-          <Route path="/" element={<Landing setAuthenticated={setAuthenticated} setLoading={setLoading} loading={loading} />} />
-          <Route path="/register" element={<Register />} />
+          {/* ⬇️ Main Layout for Private Routes */}
           <Route
-            path="/login"
-            element={<Login setAuthenticated={setAuthenticated} />}
-          />
-        </Route>
-
-        {/* ⬇️ Main Layout for Private Routes */}
-        <Route
-          element={
-            <PrivateRoute authenticated={authenticated} loading={loading}>
-              <MainLayout setAuthenticated={setAuthenticated} />
-            </PrivateRoute>
-          }
-        >
-          <Route
-            path="/home"
-            element={<Home setAuthenticated={setAuthenticated} />}
-          />
-          <Route path="/contact" element={<Contactus/>}/>
-          <Route path="/about" element={<Aboutus/>}/>
-          <Route path= "/products" element= {<ProductGrid/>}/>
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+            element={
+              <PrivateRoute authenticated={authenticated} loading={loading}>
+                <MainLayout setAuthenticated={setAuthenticated} />
+              </PrivateRoute>
+            }
+          >
+            <Route
+              path="/home"
+              element={<Home setAuthenticated={setAuthenticated} />}
+            />
+            <Route path="/contact" element={<Contactus />} />
+            <Route path="/about" element={<Aboutus />} />
+            <Route path="/products" element={<Product />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };

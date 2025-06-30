@@ -5,7 +5,7 @@ from App import db, migrate, cors  # Import extensions from __init__.py
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_session import Session
 from .helpers import user_schema
-from .utils.slugify import generate_slug
+# from .utils.slugify import generate_slug
 from App import events
 from .Models.user import User
 from .Models.role import UserEnum
@@ -100,12 +100,12 @@ def create_app():
     @app.get("/products")
     def Products():
         products_data = db.session.execute(db.select(Product)).scalars().all()
-        print("Fetched Products:", products_data)  # 👈 print this
+        print("Fetched Products:", products_data)  
         return jsonify([p.to_dict() for p in products_data] )
 
     @app.post("/logout")
     def logout():
         session.pop("user_id", None)
-        return jsonify({"message": "Logged out"})
+        return jsonify({"message": "Logged out"}) 
 
     return app

@@ -9,7 +9,7 @@ import XIcon from '@mui/icons-material/X';
 
 function MyFooter() {
   return (
-    <footer className="bg-gray-900 dark:bg-gray-900">
+    <footer className="bg-gray-900 dark:bg-gray-800">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           
