@@ -85,11 +85,11 @@ const FilterComponent = ({ isOpen, onClose }) => {
   const BrandSection = () => {
     const brandGroups = {
       A: ['Apple (56)', 'Asus (97)', 'Acer (234)', 'Allview (45)', 'Atari (176)', 'AMD (49)', 'Aruba (16)'],
-      B: ['Beats (56)', 'Bose (97)', 'BenQ (45)', 'Bosch (176)', 'Brother (176)', 'Biostar (49)', 'Braun (16)', 'Blaupunkt (45)', 'BenQ (23)'],
+      B: ['Beats (56)', 'Bose (97)', 'BenQ (45)', 'Bosch (176)', 'Brother (176)', 'Biostar (49)', 'Braun (16)', 'Blaupunkt (45)'],
       C: ['Canon (49)', 'Cisco (97)', 'Cowon (234)', 'Clevo (45)', 'Corsair (15)'],
       D: ['Dell (56)', 'Dogfish (24)', 'Dyson (234)', 'Dobe (5)', 'Digitus (1)'],
-      E: ['Emetec (56)', 'Extreme (10)', 'Elgato (234)', 'Emerson (45)', 'EMI (176)', 'Fugoo (49)'],
-      F: ['Fujitsu (97)', 'Fitbit (56)', 'Foxconn (234)', 'Floston (45)']
+      E: ['Emetec (56)', 'Extreme (10)', 'Elgato (234)', 'Emerson (45)', 'EMI (176)'],
+      F: ['Fujitsu (97)', 'Fitbit (56)', 'Foxconn (234)', 'Floston (45)', 'Fugoo (49)']
     };
 
     return (
